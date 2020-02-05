@@ -8,9 +8,10 @@ cache:
   - "$HOME/.sonar/cache"
 
 addons:
- sonarcloud:
-  organization: "alecol1995"
-   token: "b51a559ab24f0b4c6b29e9bd388d2922355bf1d2" # encrypted value of your token
+  sonarcloud:
+    organization: "alecol1995"
+    token:
+      secure: "**************************" # encrypted value of your token
 
 jobs:
  include:
