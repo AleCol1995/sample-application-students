@@ -8,10 +8,15 @@ cache:
   - "$HOME/.sonar/cache"
 
 addons:
-  sonarcloud:
-    organization: "alecol1995"
-    token:
-      secure: "**************************" # encrypted value of your token
+ sonarcloud:
+  organization: "alecol1995"
+   token:
+    secure: "554a5f85b8d0a36d9969a65ed19bb98b98b69240" # encrypted value of your token
+
+jobs:
+ include:
+  script:
+   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 
 jobs:
  include:
@@ -31,4 +36,3 @@ jobs:
    - docker build -t app-http ./sample-application-http-api-server
    - docker tag app-http $DOCKER_USERNAME/app-http
    - docker push $DOCKER_USERNAME/app-http
-   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
