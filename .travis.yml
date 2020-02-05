@@ -1,8 +1,21 @@
 language: java
 jdk:
- - openjdk 11
+ - openjdk11
 
 jobs:
  include:
   script:
    - mvn clean verify
+
+jobs:
+ include:
+  if: branch = develop
+  script:
+   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+   - docker build -t sample-application-db-changelog-job .
+   - docker tag sample-application-db-changelog-job $DOCKER_USERNAME/sample-application-db-changelog-job
+   - docker push $DOCKER_USERNAME/sample-application-db-changelog-job
+
+   - docker build -t sample-application-http-api-server .
+   - docker tag sample-application-http-api-server $DOCKER_USERNAME/sample-application-http-api-server
+   - docker push $DOCKER_USERNAME/sample-application-http-api-server
