@@ -12,10 +12,11 @@ jobs:
   if: branch = develop
   script:
    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-   - docker build -t ./sample-application-db-changelog-job
-   - docker tag sample-application-db-changelog-job $DOCKER_USERNAME/sample-application-db-changelog-job
-   - docker push $DOCKER_USERNAME/sample-application-db-changelog-job
 
-   - docker build -t ./sample-application-http-api-server
-   - docker tag sample-application-http-api-server $DOCKER_USERNAME/sample-application-http-api-server
-   - docker push $DOCKER_USERNAME/sample-application-http-api-server
+   - docker build -t app-db ./sample-application-db-changelog-job
+   - docker tag app-db $DOCKER_USERNAME/app-db
+   - docker push $DOCKER_USERNAME/app-db
+
+   - docker build -t app-http ./sample-application-http-api-server
+   - docker tag app-http $DOCKER_USERNAME/app-http
+   - docker push $DOCKER_USERNAME/app-http
