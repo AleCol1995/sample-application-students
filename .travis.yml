@@ -7,6 +7,11 @@ cache:
   - "$HOME/.m2/repository"
   - "$HOME/.sonar/cache"
 
+addons:
+ sonarcloud:
+  organization: "alecol1995"
+   token: "b51a559ab24f0b4c6b29e9bd388d2922355bf1d2" # encrypted value of your token
+
 jobs:
  include:
   script:
@@ -26,9 +31,3 @@ jobs:
    - docker tag app-http $DOCKER_USERNAME/app-http
    - docker push $DOCKER_USERNAME/app-http
    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
-
-addons:
- sonarcloud:
-  organization: "alecol1995"
-   token:
-    secure: "b51a559ab24f0b4c6b29e9bd388d2922355bf1d2" # encrypted value of your token
