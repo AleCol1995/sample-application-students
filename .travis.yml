@@ -16,11 +16,6 @@ addons:
 jobs:
  include:
   script:
-   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
-
-jobs:
- include:
-  script:
    - mvn clean verify
 
 jobs:
@@ -36,3 +31,4 @@ jobs:
    - docker build -t app-http ./sample-application-http-api-server
    - docker tag app-http $DOCKER_USERNAME/app-http
    - docker push $DOCKER_USERNAME/app-http
+   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
